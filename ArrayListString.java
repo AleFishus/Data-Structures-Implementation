@@ -64,6 +64,19 @@ public class ArrayListString{
         }
     }
 
+    public int search(String element){
+        if(size == 0){
+            System.out.println("No hay ningun elemento en la lista");
+            return -1;
+        }else{
+            for(int i=0 ; i < size ; i++){
+                if(list[i].equals(element)) return i;
+            }
+            System.out.println("Ningun elemento fue encontrado con el mismo contenido buscado");
+            return -1;
+        }
+    }
+
     // Update element O(1)
     public void update(String element, int position){
         if(position > size){
@@ -79,6 +92,32 @@ public class ArrayListString{
         list[size] = null;
        
         return temp;
+    }
+   
+    // Remove specified element O(n)
+    public String delete(int index){
+        String[] temp = new String[list.length];
+        int cont = 0; 
+        String removedString = list[index];
+        list[index] = null;
+        
+        for(String s : list){
+            if(s != null){
+                temp[cont] = s;
+                cont++;
+            }
+        }
+        size--;
+        list = temp;
+        return removedString;
+    }
+
+    // Remove element by his content O(n)
+    public String delete(String element){
+        int index = search(element);
+        String removed = delete(index);
+       
+        return removed;
     }
 
     // Retrieve the array O(1)
